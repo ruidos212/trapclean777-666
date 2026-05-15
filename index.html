@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arthur César | Trap Clean</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(0,255,170,0.15), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(0,140,255,0.15), transparent 30%);
+      z-index: -1;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #00ffaa;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: #00ffaa;
+      filter: blur(180px);
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .glow.one {
+      top: 0;
+      right: -100px;
+    }
+
+    .glow.two {
+      bottom: 0;
+      left: -100px;
+      background: #008cff;
+    }
+
+    header h1 {
+      font-size: 5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00ffaa, #00aaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: #cccccc;
+      max-width: 700px;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      padding: 15px 35px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      color: black;
+      background: linear-gradient(90deg, #00ffaa, #00aaff);
+      transition: 0.3s;
+      box-shadow: 0 0 25px rgba(0,255,170,0.4);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(0,255,170,0.7);
+    }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 120px 20px;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #00ffaa;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 25px;
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+    }
+
+    .about-box:hover {
+      transform: translateY(-8px);
+      border-color: #00ffaa;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 35px;
+      border-radius: 25px;
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #00ffaa, #00aaff);
+      top: 0;
+      left: 0;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: #00ffaa;
+    }
+
+    .card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      color: #00ffaa;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card ul li {
+      margin-bottom: 12px;
+      color: #d7d7d7;
+    }
+
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .music-item {
+      background: rgba(255,255,255,0.04);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.3s;
+    }
+
+    .music-item:hover {
+      transform: scale(1.05);
+      border-color: #00aaff;
+    }
+
+    .contact-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 25px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .contact-box p {
+      margin: 15px 0;
+      font-size: 1.1rem;
+      color: #d7d7d7;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .socials a {
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.05);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      background: linear-gradient(90deg, #00ffaa, #00aaff);
+      color: black;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #888;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 50px;
+    }
+
+    @media(max-width: 768px) {
+      header h1 {
+        font-size: 3rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      nav {
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#shows">Shows</a>
+    <a href="#repertorio">Repertório</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <header>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+    <h1>Arthur César</h1>
+    <p>
+      Trap BR Clean • Rap Melódico • Shows Family Friendly
+      para escolas, eventos culturais e público jovem.
+    </p>
+
+    <a href="#contato" class="btn">CONTRATAR SHOW</a>
+  </header>
+
+  <section id="sobre">
+    <h2>Sobre Mim</h2>
+
+    <div class="about">
+      <div class="about-box">
+        <h3>🎤 Quem Sou</h3>
+        <p>
+          Cantor iniciante de Macaé/RJ focado em trap clean,
+          rap melódico e apresentações sem palavrão.
+        </p>
+      </div>
+
+      <div class="about-box">
+        <h3>🔥 Objetivo</h3>
+        <p>
+          Levar música moderna para escolas, festivais,
+          praças e eventos jovens com uma vibe positiva.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="shows">
+    <h2>Pacotes de Show</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Pocket Show</h3>
+        <div class="price">R$250</div>
+
+        <ul>
+          <li>✔ 20-30 minutos</li>
+          <li>✔ Playback</li>
+          <li>✔ Ideal para escolas</li>
+          <li>✔ Trap clean</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Trap Session</h3>
+        <div class="price">R$500</div>
+
+        <ul>
+          <li>✔ 40-60 minutos</li>
+          <li>✔ Interação com público</li>
+          <li>✔ Repertório completo</li>
+          <li>✔ Eventos culturais</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Show Premium</h3>
+        <div class="price">R$900+</div>
+
+        <ul>
+          <li>✔ Entrada personalizada</li>
+          <li>✔ Vídeos e fotos</li>
+          <li>✔ Eventos grandes</li>
+          <li>✔ Presença artística</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="repertorio">
+    <h2>Repertório</h2>
+
+    <div class="music-grid">
+      <div class="music-item">
+        <h3>YES OR NO</h3>
+        <p>Teto</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Anos Luz</h3>
+        <p>Abertura / vibe tranquila</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Leão</h3>
+        <p>Versão acústica/trap</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Poesia Acústica</h3>
+        <p>Trechos leves e clean</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Céu Azul</h3>
+        <p>Trap acústico leve</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Mustang Preto</h3>
+        <p>Trap melódico clean</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Fim de Semana no Rio</h3>
+        <p>Trap melódico clean</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Conexões de Máfia</h3>
+        <p>Versão adaptada</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Felina</h3>
+        <p>Versão clean</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Coração de Gelo</h3>
+        <p>Trap melódico clean</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Perfeita</h3>
+        <p>Rap/trap leve</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Freio da Blazer</h3>
+        <p>Versão adaptada</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Gratidão</h3>
+        <p>Rap consciente</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Essa Vida é Muito Boa</h3>
+        <p>Rap/trap leve</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Vampiro</h3>
+        <p>Versão clean</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Flow Espacial</h3>
+        <p>Parte mais animada</p>
+      </div>
+
+      <div class="music-item">
+        <h3>A Dança</h3>
+        <p>Vibe animada</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Melhor Só</h3>
+        <p>Encerramento emocional</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Mó Paz</h3>
+        <p>Encerramento emocional</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Só Mais Um Pouco</h3>
+        <p>Finalização leve</p>
+      </div>
+
+      <div class="music-item">
+        <h3>Músicas Autorais</h3>
+        <p>Em breve...</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px;">
+      <h2>Página de Música</h2>
+
+      <div class="card" style="max-width: 800px; margin: auto; text-align: center;">
+        <h3 style="font-size: 2.5rem; margin-bottom: 10px;">YES OR NO</h3>
+        <p style="color: #00ffaa; margin-bottom: 20px; font-size: 1.2rem;">Teto</p>
+
+        <p style="color: #d7d7d7; line-height: 1.8; margin-bottom: 25px;">
+          Música presente no repertório trap clean,
+          adaptada para apresentações family friendly,
+          eventos escolares e shows jovens.
+        </p>
+
+        <a href="#contato" class="btn">PEDIR SHOW</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+
+    <div class="contact-box">
+      <p>📍 Macaé - RJ</p>
+      <p>📸 Instagram: @acas0.0</p>
+      <p>🎵 TikTok: @seuuser</p>
+      <p>📞 WhatsApp: (22) 98180-0085</p>
+
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Arthur César • Trap Clean Experience
+  </footer>
+
+</body>
+</html>
